@@ -106,13 +106,16 @@ Logger.Dump = function
     return 1
 end function
 Logger.Info = function(message="")
-    print("[*] ".color("#3366cc")+message)
+    print("["+"INFO".color("#3366cc")+"] "+message)
 end function
-Logger.Good = function(message="")
-    print("[+] ".color("#00ff00")+message)
+Logger.Success = function(message="")
+    print("["+"SUCCESS".color("#00ff00")+"] "+message)
+end function
+Logger.Warning = function(message="")
+    print("["+"WARNING".color("#e6e600")+"] "+message)
 end function
 Logger.Error = function(message="")
-    print("[-] ".color("#ff0000")+message)
+    print("["+"ERROR".color("#990000")+"] "+message)
 end function
 
 Crypto = {"classID": "Crypto"}
