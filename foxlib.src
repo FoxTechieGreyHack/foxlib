@@ -1,3 +1,77 @@
+string.bold = function(self)
+    if not self isa string then return null
+    return "<b>"+self+"</b>"
+end function
+bold = @string.bold
+
+string.italic = function(self)
+    if not self isa string then return null
+    return "<i>"+self+"</i>"
+end function
+italic = @string.italic
+
+string.underline = function(self)
+    if not self isa string then return null
+    return "<u>"+self+"</u>"
+end function
+underline = @string.underline
+
+string.color = function(self, color)
+    if not self isa string then return null
+    return "<color="+color+">"+self+"</color>"
+end function
+color = @string.color
+
+string.alpha = function(self, alpha)
+    if not self isa string then return null
+    return "<alpha="+alpha+">"+self+"</alpha>"
+end function
+alpha = @string.alpha
+
+string.mark = function(self, mark)
+    if not self isa string then return null
+    return "<mark="+mark+">"+self+"</mark>"
+end function
+mark = @string.mark
+
+string.Size = function(self, px)
+    if not self isa string then return null
+    return "<size="+px+">"+self+"</size>"
+end function
+Size = @string.Size
+
+string.escape = function(self)
+    if not self isa string then return null
+    return self.replace("(?=\\|\.|\+|\*|\?|\^|\$|\(|\)|\[|\]|\{|\}|\|)","\")
+end function
+escape = @string.escape
+
+string.startswith = function(self, start)
+    if not self isa string then return null
+    return self[:len(start)] == start
+end function
+startswith = @string.startswith
+
+string.endswith = function(self, start)
+    if not self isa string then return null
+    return self[-len(start):] == start
+end function
+endswith = @string.endswith
+
+map.hasValue = function(self, item)
+    if not self isa string and not self isa list and not self isa map then return null
+    return self.indexOf(item) != null
+end function
+list.hasValue = function(self, item)
+    if not self isa string and not self isa list and not self isa map then return null
+    return self.indexOf(item) != null
+end function
+string.hasValue = function(self, item)
+    if not self isa string and not self isa list and not self isa map then return null
+    return self.indexOf(item) != null
+end function
+hasValue = @string.hasValue
+
 Error = {"classID": "Error"}
 Error.Message = "Unknown error"
 Error.New = function(message=null)
@@ -30,6 +104,15 @@ Logger.Dump = function
         self.Log(log)
     end for
     return 1
+end function
+Logger.Info = function(message="")
+    print("[*] ".color("#3366cc")+message)
+end function
+Logger.Good = function(message="")
+    print("[+] ".color("#00ff00")+message)
+end function
+Logger.Error = function(message="")
+    print("[-] ".color("#ff0000")+message)
 end function
 
 Crypto = {"classID": "Crypto"}
