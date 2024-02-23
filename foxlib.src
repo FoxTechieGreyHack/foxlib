@@ -59,11 +59,11 @@ end function
 endswith = @string.endswith
 
 map.hasValue = function(self, item)
-    if not self isa string and not self isa list and not self isa map then return null
+    if not self isa map then return null
     return self.indexOf(item) != null
 end function
 list.hasValue = function(self, item)
-    if not self isa string and not self isa list and not self isa map then return null
+    if not self isa list then return null
     return self.indexOf(item) != null
 end function
 string.hasValue = function(self, item)
