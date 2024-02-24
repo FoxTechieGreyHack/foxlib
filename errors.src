@@ -1,0 +1,45 @@
+Error = {"classID": "Error"}
+Error.Message = "Unknown error"
+Error.New = function(message=null)
+    error = new Error
+    error.classID = self.classID
+    if not message isa string then message = self.Message
+    error.Message = message
+    return error
+end function
+Error.Raise = function(message=null)
+    if message == null then exit(self.Message)
+    if not message isa string then exit("Error.Raise: Expected a type of type Error")
+    exit(message)
+end function
+
+Logger = {"classID": "Logger"}
+Logger.Logs = []
+Logger.Save = function(error)
+    if not error isa Error then error = Error.Raise("Logger.Save: Expected a type of type Error")
+    self.Logs.push(error)
+    return 1
+end function
+Logger.Log = function(error)
+    if not error isa Error then Error.Raise("Logger.Log: Expected a type of type Error")
+    print(error.Message)
+    return 1
+end function
+Logger.Dump = function
+    for log in self.Logs
+        self.Log(log)
+    end for
+    return 1
+end function
+Logger.Info = function(message="")
+    print("[<color=#3366cc>INFO</color>] "+message)
+end function
+Logger.Success = function(message="")
+    print("[<color=#00ff00>SUCCESS</color>] "+message)
+end function
+Logger.Warning = function(message="")
+    print("[<color=#e6e600>WARNING</color>] "+message)
+end function
+Logger.Error = function(message="")
+    print("[<color=#990000>ERROR</color>] "+message)
+end function
