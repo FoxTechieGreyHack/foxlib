@@ -32,14 +32,18 @@ Logger.Dump = function
     return 1
 end function
 Logger.Info = function(message="")
+    if message isa Error then message = message.Message
     print("[<color=#3366cc>INFO</color>] "+message)
 end function
 Logger.Success = function(message="")
+    if message isa Error then message = message.Message
     print("[<color=#00ff00>SUCCESS</color>] "+message)
 end function
 Logger.Warning = function(message="")
+    if message isa Error then message = message.Message
     print("[<color=#e6e600>WARNING</color>] "+message)
 end function
 Logger.Error = function(message="")
+    if message isa Error then message = message.Message
     print("[<color=#990000>ERROR</color>] "+message)
 end function
