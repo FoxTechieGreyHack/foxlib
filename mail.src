@@ -5,12 +5,13 @@ Email = {
     "subject": null,
     "content": null,
 }
+
 Mail = {"classID": "Mail"}
 Mail.object = null
 Mail.emails = null
 Mail.Login = function(email, password)
     mail = mail_login(email, password)
-    if mail isa string then return Error.New("Mail.Login: Email login failed")
+    if mail isa string then return Error.New("Mail.Login: Mail login failed")
     self.object = mail
 end function
 
