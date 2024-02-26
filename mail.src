@@ -1,0 +1,47 @@
+Email = {
+    "classID": "Email",
+    "mailid": null,
+    "sender": null,
+    "subject": null,
+    "content": null,
+}
+Mail = {"classID": "Mail"}
+Mail.object = null
+Mail.emails = null
+Mail.Login = function(email, password)
+    mail = mail_login(email, password)
+    if mail isa string then return Error.New("Mail.Login: Email login failed")
+    self.object = mail
+end function
+
+Mail.Send = function(email, subject, message)
+    if self.object == null then return Error.New("Mail.Send: Mail object is null")
+    sent = self.object.send(email, subject, message)
+    if sent != true then return Error.New("Mail.Send: Email failed to send")
+end function
+
+Mail.Fetch = function
+    if self.object == null then return Error.New("Mail.Fetch: Mail object is null")
+    fetched = self.object.fetch
+    if not fetched isa list then return Error.New("Mail.Fetch: Mail fetching failed")
+
+    mailList = []
+    for mail in fetched
+        email = new Email
+        for line in mail.split(char(10))
+            if line == "" then continue
+            if line.startswith("MailID") and not email.mailid then email.mailid = line.split(": ")[1]
+            if line.startswith("From") and not email.sender then email.sender = line.split(": ")[1]
+            if line.startswith("Subject") and not email.subject then email.subject = line.split(": ")[1]
+        end for
+        email.content = self.object.read(email.mailid).split(char(10))[3:].join(char(10))
+        mailList.push(email)
+    end for
+    self.emails = mailList
+end function
+
+Mail.Delete = function(mailid)
+    if self.object == null then return Error.New("Mail.Delete: Mail object is null")
+    sent = self.object.delete(mailid)
+    if sent != true then return Error.New("Mail.Delete: Email failed to delete")
+end function
