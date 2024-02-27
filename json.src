@@ -1,4 +1,4 @@
-//-- json Parser
+//-- json Parser:
 //-- parse(file.get_content) will load a json text file into a map
 //-- toJSON(map) will convert the map to json string
 Parser={"hex_digit_map":{},"escape_to":["\\","\""","\b","\t","\n","\f","\r"],"eol":char(13),"escape_from":["\\","""",char(8),char(9),char(10),char(12),char(13)],"white_space":" "+char(9)+char(10)+char(13),"source":"","source_len":0,"p":0,"classID":"ParserLib   1.0.0-rc.1"}
